@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form
+    method="POST"
+    action="{% url 'newVault' %}"
+    enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <p>
+        <input type="submit" />
+    </p>
+</form>
+
+{% endblock %}

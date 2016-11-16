@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse_lazy
 
 # Create your models here.
 class Vault(models.Model):
@@ -12,3 +13,6 @@ class Vault(models.Model):
     def delete(self, *args, **kwargs):
         self.Logo.delete();
         super(Vault, self).delete(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse_lazy('openVault', kwargs={'id': self.id})
