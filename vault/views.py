@@ -10,7 +10,15 @@ sys.setdefaultencoding('utf-8')
 
 # Create your views here.
 def show_vault(request):
-    return HttpResponse('Hello World!')
+    vaults = Vault.objects.filter()
+    return render(
+        request,
+        'showvault.html',
+        {
+            'vaults' : vaults,
+        }
+    )
+    # return HttpResponse('Hello World!')
 
 def open_vault(request, id):
     vault = get_object_or_404(Vault, pk = id)
@@ -45,7 +53,7 @@ def new_vault(request):
 
     return render(
         request,
-        'newVault.html',
+        'newvault.html',
         {
             'form': newForm,
         }

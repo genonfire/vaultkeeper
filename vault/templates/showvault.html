@@ -1,0 +1,12 @@
+<html>
+{% for vault in vaults %}
+    <div>
+    <p><font color=red>{{vault.id}}</font></p>
+    <p>{{vault.Type}}</p>
+    <p>{{vault.Number}}</p>
+    <p>{{vault.Valid}}</p>
+    <p>{{vault.CVC}}</p>
+    <p>{{vault.Logo}}</p>
+    </div>
+{% endfor %}
+</html>
