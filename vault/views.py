@@ -1,6 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from models import Vault
 from vault.forms import VaultEditForm
@@ -10,11 +9,11 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # Create your views here.
-def showVault(request):
+def show_vault(request):
     return HttpResponse('Hello World!')
 
-def openVault(request, id):
-    vault = Vault.objects.get(pk = id)
+def open_vault(request, id):
+    vault = get_object_or_404(Vault, pk = id)
 
     outputText = 'Type: {Type}<br>'
     outputText += 'Name: {Name}<br>'
@@ -34,7 +33,7 @@ def openVault(request, id):
 
     return HttpResponse(textformatted)
 
-def newVault(request):
+def new_vault(request):
     if request.method == "GET":
         newForm = VaultEditForm()
     elif request.method == "POST":

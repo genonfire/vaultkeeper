@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^showvault/', 'vault.views.showVault', name='showVault'),
-    url(r'^vault/(?P<id>\d+)/$', 'vault.views.openVault', name='openVault'),
-    url(r'^vault/new/$', 'vault.views.newVault', name='newVault'),
+    url(r'^$', 'vault.views.show_vault', name='show vault'),
+    url(r'^vault/(?P<id>\d+)/$', 'vault.views.open_vault', name='open vault'),
+    url(r'^vault/new/$', 'vault.views.new_vault', name='new vault'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

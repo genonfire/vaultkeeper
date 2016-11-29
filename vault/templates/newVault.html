@@ -3,13 +3,13 @@
 {% block content %}
 <form
     method="POST"
-    action="{% url 'newVault' %}"
+    action="{% url 'new vault' %}"
     enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}
 
     <p>
-        <input type="submit" />
+        <input type="reset" style="border-color:red"> <input type="submit" />
     </p>
 </form>
 

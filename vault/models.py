@@ -1,9 +1,18 @@
+#-*- coding: utf-8 -*-
 from django.db import models
 from django.core.urlresolvers import reverse_lazy
+from django import forms
 
 # Create your models here.
 class Vault(models.Model):
-    Type = models.CharField(max_length=20)
+    TYPE_OPTIONS = (
+        ('card', '카드'),
+        ('account', '계좌'),
+        ('membership', '멤버십'),
+        ('etc', '기타'),
+    )
+
+    Type = models.CharField(max_length=20, choices=TYPE_OPTIONS, default='card')
     Name = models.CharField(max_length=30)
     Number = models.CharField(max_length=50)
     Valid = models.CharField(max_length=20, blank=True)
@@ -15,4 +24,4 @@ class Vault(models.Model):
         super(Vault, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy('openVault', kwargs={'id': self.id})
+        return reverse_lazy('open_vault', kwargs={'id': self.id})
