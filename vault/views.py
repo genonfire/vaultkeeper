@@ -18,7 +18,6 @@ def show_vault(request):
             'vaults' : vaults,
         }
     )
-    # return HttpResponse('Hello World!')
 
 def open_vault(request, id):
     vault = get_object_or_404(Vault, pk = id)

@@ -12,12 +12,20 @@ class Vault(models.Model):
         ('etc', '기타'),
     )
 
+    LOGO_OPTIONS = (
+        ('logos/samsungcard.png', '샘숭카드'),
+        ('logos/kdb.png', '산업은행'),
+        ('logos/shinhan.png', '신한은행'),
+        ('logos/keb.png', '외환은행'),
+        ('logos/woori.png', '우리은행'),
+    )
+
     Type = models.CharField(max_length=20, choices=TYPE_OPTIONS, default='card')
     Name = models.CharField(max_length=30)
     Number = models.CharField(max_length=50)
     Valid = models.CharField(max_length=20, blank=True)
     CVC = models.CharField(max_length=10, blank=True)
-    Logo = models.ImageField(upload_to="images/", blank=True)
+    Logo = models.CharField(max_length=20, choices=LOGO_OPTIONS)
 
     def delete(self, *args, **kwargs):
         self.Logo.delete();

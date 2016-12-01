@@ -1,4 +1,5 @@
-<html>
+{% extends 'layout.html' %}
+{% block content %}
 {% for vault in vaults %}
     <div>
     <p><font color=red>{{vault.id}}</font></p>
@@ -9,4 +10,4 @@
     <p>{{vault.Logo}}</p>
     </div>
 {% endfor %}
-</html>
+{% endblock %}

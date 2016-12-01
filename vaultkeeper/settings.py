@@ -82,7 +82,7 @@ USE_TZ = True
 
 STATIC_URL = '/assets/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'logos'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 MEDIA_URL = '/logo/'
