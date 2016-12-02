@@ -4,10 +4,10 @@
     <div>
     <p><font color=red>{{vault.id}}</font></p>
     <p>{{vault.Type}}</p>
+    <p><img src="{{STATIC_URL}}{{vault.Logo}}"> {{vault.Name}}</p>
     <p>{{vault.Number}}</p>
     <p>{{vault.Valid}}</p>
     <p>{{vault.CVC}}</p>
-    <p>{{vault.Logo}}</p>
     </div>
 {% endfor %}
 {% endblock %}

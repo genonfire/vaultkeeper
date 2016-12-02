@@ -25,11 +25,11 @@ class Vault(models.Model):
     Number = models.CharField(max_length=50)
     Valid = models.CharField(max_length=20, blank=True)
     CVC = models.CharField(max_length=10, blank=True)
-    Logo = models.CharField(max_length=20, choices=LOGO_OPTIONS)
+    Logo = models.CharField(max_length=50, choices=LOGO_OPTIONS)
 
     def delete(self, *args, **kwargs):
         self.Logo.delete();
         super(Vault, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy('open_vault', kwargs={'id': self.id})
+        return reverse_lazy('open vault', kwargs={'id': self.id})

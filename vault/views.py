@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
+from django.conf import settings
 from models import Vault
 from vault.forms import VaultEditForm
 
@@ -35,7 +36,7 @@ def open_vault(request, id):
         Number = vault.Number,
         Valid = vault.Valid,
         CVC = vault.CVC,
-        Logo = vault.Logo.url
+        Logo = settings.STATIC_URL + vault.Logo
         )
 
     return HttpResponse(textformatted)
