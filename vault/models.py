@@ -25,7 +25,7 @@ class Vault(models.Model):
     Number = models.CharField(max_length=50)
     Valid = models.CharField(max_length=20, blank=True)
     CVC = models.CharField(max_length=10, blank=True)
-    Logo = models.CharField(max_length=50, choices=LOGO_OPTIONS)
+    Logo = models.CharField(max_length=50, choices=LOGO_OPTIONS, blank=True)
 
     def delete(self, *args, **kwargs):
         self.Logo.delete();
