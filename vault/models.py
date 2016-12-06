@@ -6,10 +6,10 @@ from django import forms
 # Create your models here.
 class Vault(models.Model):
     TYPE_OPTIONS = (
-        ('card', '카드'),
-        ('account', '계좌'),
-        ('membership', '멤버십'),
-        ('etc', '기타'),
+        ('1account', '계좌'),
+        ('2card', '카드'),
+        ('3membership', '멤버십'),
+        ('4etc', '기타'),
     )
 
     LOGO_OPTIONS = (
@@ -33,3 +33,4 @@ class Vault(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy('open vault', kwargs={'id': self.id})
+

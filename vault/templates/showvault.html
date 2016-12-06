@@ -1,13 +1,36 @@
 {% extends 'layout.html' %}
 {% block content %}
+<table class="headMenu">
+<tr>
+    <td class="accountLive">계좌번호</td>
+    <td class="securitycard"><a href="#">보안카드</a></td>
+    <td class="headMenu"><a href="/vault/new/"><img src="{{STATIC_URL}}icons/add36.png"></a> <img src="{{STATIC_URL}}icons/identity36.png"></td>
+</tr>
+</table>
+<div class="card">
 {% for vault in vaults %}
-    <div>
-    <p><font color=red>{{vault.id}}</font></p>
-    <p>{{vault.Type}}</p>
-    <p><img src="{{STATIC_URL}}{{vault.Logo}}"> {{vault.Name}}</p>
-    <p>{{vault.Number}}</p>
-    <p>{{vault.Valid}}</p>
-    <p>{{vault.CVC}}</p>
-    </div>
+    <table class="card" onclick="clicked(this)">
+    <tr>
+        <td rowspan="2" width="32px">
+        {% if vault.Logo|length < 4 %}
+        <img src="{{STATIC_URL}}logos/item_icon_default.png">
+        {% else %}
+        <img src="{{STATIC_URL}}{{vault.Logo}}">
+        {% endif %}
+        </td>
+        <td>{{vault.Name}}</td>
+    </tr>
+    <tr>
+        <td>{{vault.Number}}
+        {% if vault.Type == "2card" %}
+         ({{vault.Valid}}/{{vault.CVC}})
+        {% endif %}
+        </td>
+    </tr>
+    </table>
+    {% if not forloop.last %}
+        <hr>
+    {% endif %}
 {% endfor %}
+</div>
 {% endblock %}

@@ -11,7 +11,8 @@ sys.setdefaultencoding('utf-8')
 
 # Create your views here.
 def show_vault(request):
-    vaults = Vault.objects.filter()
+    vaults = Vault.objects.filter().order_by('Type')
+
     return render(
         request,
         'showvault.html',
