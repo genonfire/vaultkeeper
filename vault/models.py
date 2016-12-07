@@ -27,10 +27,5 @@ class Vault(models.Model):
     CVC = models.CharField(max_length=10, blank=True)
     Logo = models.CharField(max_length=50, choices=LOGO_OPTIONS, blank=True)
 
-    def delete(self, *args, **kwargs):
-        self.Logo.delete();
-        super(Vault, self).delete(*args, **kwargs)
-
     def get_absolute_url(self):
         return reverse_lazy('show vault')
-

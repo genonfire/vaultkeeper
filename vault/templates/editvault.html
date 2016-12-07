@@ -7,7 +7,19 @@
     {% csrf_token %}
     {{form.as_p}}
     <p>
-        <input type="reset" style="border-color:red"> <input type="submit" />
+        <input type="reset" style="border-color:blue"> <input type="submit" />
     </p>
+    {% if form.Name.value != None %}
+        <script>
+        function checkDelete(deleteText) {
+            if (deleteText == 'delete')
+                location.href="{% url 'remove vault' id=vault.id %}"
+        }
+        </script>
+        <div class="delete">
+        <i>{{form.Name.value}}</i> 삭제하려면 <font color="red"><b>delete</b></font> 입력 후 삭제 버튼을 누르세요.<br>
+        <input id="delbox" type="text" size="8"> <input type="button" value="삭제" style="border-color:red" onclick="checkDelete(document.getElementById('delbox').value)">
+        </div>
+    {% endif %}
 </form>
 {% endblock %}

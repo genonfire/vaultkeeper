@@ -75,5 +75,12 @@ def edit_vault(request, id):
         'editvault.html',
         {
             'form': editForm,
+            'vault': vault,
         }
     )
+
+def remove_vault(request, id):
+    vault = get_object_or_404(Vault, pk = id)
+    vault.delete()
+
+    return redirect(vault.get_absolute_url())
