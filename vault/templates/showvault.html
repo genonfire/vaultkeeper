@@ -19,6 +19,9 @@
         {% endif %}
         </td>
         <td>{{vault.Name}}</td>
+        <td rowspan="2" width="32px">
+        <a href="{% url 'edit vault' id=vault.id %}"><img src="{{STATIC_URL}}icons/edit24.png"></a>
+        </td>
     </tr>
     <tr>
         <td>{{vault.Number}}

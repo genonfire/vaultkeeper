@@ -43,19 +43,37 @@ def open_vault(request, id):
     return HttpResponse(textformatted)
 
 def new_vault(request):
-    if request.method == "GET":
-        newForm = VaultEditForm()
-    elif request.method == "POST":
+    if request.method == "POST":
         newForm = VaultEditForm(request.POST, request.FILES)
-
-    if newForm.is_valid():
-        newVault = newForm.save()
-        return redirect(newVault.get_absolute_url())
+        if newForm.is_valid():
+            newVault = newForm.save()
+            return redirect(newVault.get_absolute_url())
+    elif request.method == "GET":
+        newForm = VaultEditForm()
 
     return render(
         request,
-        'newvault.html',
+        'editvault.html',
         {
             'form': newForm,
+        }
+    )
+
+def edit_vault(request, id):
+    vault = get_object_or_404(Vault, pk = id)
+
+    if request.method == "POST":
+        editForm = VaultEditForm(request.POST, request.FILES, instance=vault)
+        if editForm.is_valid():
+            editVault = editForm.save()
+            return redirect(editVault.get_absolute_url())
+    elif request.method == "GET":
+        editForm = VaultEditForm(instance=vault)
+
+    return render(
+        request,
+        'editvault.html',
+        {
+            'form': editForm,
         }
     )

@@ -32,5 +32,5 @@ class Vault(models.Model):
         super(Vault, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy('open vault', kwargs={'id': self.id})
+        return reverse_lazy('show vault')
 
