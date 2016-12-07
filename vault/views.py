@@ -54,7 +54,7 @@ def new_vault(request):
 
     return render(
         request,
-        'editvault.html',
+        'newvault.html',
         {
             'form': newForm,
         }
