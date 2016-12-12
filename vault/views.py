@@ -56,6 +56,7 @@ def new_vault(request):
         'editvault.html',
         {
             'form': newForm,
+            'editType': 'new',
         }
     )
 
@@ -76,6 +77,7 @@ def edit_vault(request, id):
         {
             'form': editForm,
             'vault': vault,
+            'editType': 'edit',
         }
     )
 

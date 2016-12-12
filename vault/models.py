@@ -13,19 +13,37 @@ class Vault(models.Model):
     )
 
     LOGO_OPTIONS = (
-        ('logos/samsungcard.png', '샘숭카드'),
         ('logos/kdb.png', '산업은행'),
-        ('logos/shinhan.png', '신한은행'),
         ('logos/keb.png', '외환은행'),
         ('logos/woori.png', '우리은행'),
+        ('logos/shinhan.png', '신한은행'),
+        ('logos/kfcc.png', '새마을금고'),
+        ('logos/kiwoom.png', '키움증권'),
+        ('logos/samsungfn.png', '삼성증권'),
+        ('logos/samsungcard.png', '삼성카드'),
+        ('logos/koreanair.png', '대한항공'),
+        ('logos/asiana.png', '아시아나'),
+        ('logos/asiamiles.png', '아시아마일스'),
+        ('logos/finnair.png', '핀에어'),
+        ('logos/spg.png', 'SPG'),
+        ('logos/hertz.png', 'Hertz'),
+        ('logos/hyatt.png', 'HYATT'),
+        ('logos/marriot.png', '매리어트'),
+        ('logos/gs.png', 'GS'),
+        ('logos/homeplus.png', '홈플러스'),
+        ('logos/okcashbag.png', 'OK 캐쉬백'),
+        ('logos/skt.png', 'SKT'),
+        ('logos/olleh.png', '올레'),
     )
 
-    Type = models.CharField(max_length=20, choices=TYPE_OPTIONS, default='card')
+    Type = models.CharField(max_length=20, choices=TYPE_OPTIONS, default='1account')
     Name = models.CharField(max_length=30)
     Number = models.CharField(max_length=50)
     Valid = models.CharField(max_length=20, blank=True)
     CVC = models.CharField(max_length=10, blank=True)
     Logo = models.CharField(max_length=50, choices=LOGO_OPTIONS, blank=True)
+    Serial = models.CharField(max_length=20, blank=True)
+    Code = models.CommaSeparatedIntegerField(max_length=255, blank=True)
 
     def get_absolute_url(self):
         return reverse_lazy('show vault')

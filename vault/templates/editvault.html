@@ -1,15 +1,46 @@
 {% extends 'layout.html' %}
-
 {% block content %}
 <form
     method="POST"
     enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.as_p}}
+    <div class="input_required">
+    <p>이름 {{form.Name}} &nbsp;종류 {{form.Type}}</p>
+    <p>번호 {{form.Number}}<p>
+    </div>
+    <div class="input_icon">
+    <p>{{form.Logo}}</p>
+    </div>
+    <div class="input_card" id="input_card">
+    <p><b><font color="white">신용카드</font></b><br>유효기간 {{form.Valid}} &nbsp;CVC {{form.CVC}}</p>
+    </div>
+    <div class="input_code" id="input_code">
+    <p><b><font color="white">보안카드</font></b><br>일련번호 {{form.Serial}}</p>
+    <p>코드 {{form.Code}}<br><font color="red">보안카드 번호를 띄어쓰기 없이 콤마로 분리해서 입력하쇼<br>ex) 1111,2222,3333,4444,5555</font></p>
+    </div>
+    <script>
+    function checkType() {
+        var selectedType = document.getElementById('id_Type').value;
+        if (selectedType == '2card') {
+            document.getElementById('input_card').style.backgroundColor = '#8298a6'
+            document.getElementById('input_code').style.backgroundColor = 'white'
+        }
+        else if (selectedType == '1account') {
+            document.getElementById('input_code').style.backgroundColor = '#6bb23c'
+            document.getElementById('input_card').style.backgroundColor = 'white'
+        }
+        else {
+            document.getElementById('input_card').style.backgroundColor = 'white'
+            document.getElementById('input_code').style.backgroundColor = 'white'
+        }
+    }
+    window.onload = checkType();
+    </script>
+
     <p>
         <input type="reset" style="border-color:blue"> <input type="submit" />
     </p>
-    {% if form.Name.value != None %}
+    {% if editType == 'edit' %}
         <script>
         function checkDelete(deleteText) {
             if (deleteText == 'delete')
