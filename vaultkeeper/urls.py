@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'vault.views.show_vault', name='show vault'),
-    url(r'^vault/(?P<id>\d+)/$', 'vault.views.open_vault', name='open vault'),
+    url(r'^openvault/$', 'vault.views.open_vault', name='open vault'),
     url(r'^vault/new/$', 'vault.views.new_vault', name='new vault'),
     url(r'^vault/(?P<id>\d+)/edit/$', 'vault.views.edit_vault', name='edit vault'),
     url(r'^vault/(?P<id>\d+)/remove/$', 'vault.views.remove_vault', name='remove vault'),

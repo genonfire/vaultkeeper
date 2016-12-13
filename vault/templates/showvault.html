@@ -2,11 +2,18 @@
 {% block content %}
 <table class="headMenu">
 <tr>
+{% if showType == 'show' %}
     <td class="accountLive">계좌번호</td>
-    <td class="securitycard"><a href="#">보안카드</a></td>
+    <td class="securitycard"><a href="{% url 'open vault' %}">보안카드</a></td>
     <td class="headMenu"><a href="/vault/new/"><img src="{{STATIC_URL}}icons/add36.png"></a> <img src="{{STATIC_URL}}icons/identity36.png"></td>
+{% else %}
+    <td class="account"><a href="{% url 'show vault' %}">계좌번호</a></td>
+    <td class="securitycardLive">보안카드</a></td>
+    <td class="headMenu"><a href="/vault/new/"><img src="{{STATIC_URL}}icons/add36.png"></a> <img src="{{STATIC_URL}}icons/identity36.png"></td>
+{% endif %}
 </tr>
 </table>
+{% if showType == 'show' %}
 <div class="card">
 {% for vault in vaults %}
     <table class="card" onclick="clicked(this)">
@@ -36,4 +43,26 @@
     {% endif %}
 {% endfor %}
 </div>
+{% else %}
+<div class="code">
+    <form>
+        <p><select>
+        {% for vault in vaults %}
+            <option vaule="{{vault.id}}">{{vault.Name}}</option>
+        {% endfor %}
+        </select>
+        <br><table class="code">
+        <tr>
+        <td><input type="text" maxlength="2" class="input"></td>
+        <td><input type="text" maxlength="2" class="code"></td>
+        <td><input type="text" maxlength="2" class="deadcode"></td>
+        </tr>
+        <td><input type="text" maxlength="2" class="input"></td>
+        <td><input type="text" maxlength="2" class="deadcode"></td>
+        <td><input type="text" maxlength="2" class="code"></td>
+        </table></p>
+        <p><input type="reset" style="border-color:blue"> <input type="submit" /></p>
+    </form>
+</div>
+{% endif %}
 {% endblock %}

@@ -11,36 +11,28 @@ sys.setdefaultencoding('utf-8')
 
 # Create your views here.
 def show_vault(request):
-    vaults = Vault.objects.filter().order_by('Type')
+    vaults = Vault.objects.all().order_by('Type')
 
     return render(
         request,
         'showvault.html',
         {
             'vaults' : vaults,
+            'showType' : 'show',
         }
     )
 
-def open_vault(request, id):
-    vault = get_object_or_404(Vault, pk = id)
+def open_vault(request):
+    vaults = Vault.objects.filter(Type='1account').exclude(Serial='').exclude(Code='')
 
-    outputText = 'Type: {Type}<br>'
-    outputText += 'Name: {Name}<br>'
-    outputText += 'Number: {Number}<br>'
-    outputText += 'Valid: {Valid}<br>'
-    outputText += 'CVC: {CVC}<br>'
-    outputText += 'Image: <img src={Logo}><br>'
-
-    textformatted = outputText.format(
-        Type = vault.Type,
-        Name = vault.Name,
-        Number = vault.Number,
-        Valid = vault.Valid,
-        CVC = vault.CVC,
-        Logo = settings.STATIC_URL + vault.Logo
-        )
-
-    return HttpResponse(textformatted)
+    return render(
+        request,
+        'showvault.html',
+        {
+            'vaults' : vaults,
+            'showType' : 'open',
+        }
+    )
 
 def new_vault(request):
     if request.method == "POST":
