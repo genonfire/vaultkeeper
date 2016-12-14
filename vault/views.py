@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from models import Vault
 from vault.forms import VaultEditForm
+import json
 
 import sys
 reload(sys)
@@ -78,3 +79,9 @@ def remove_vault(request, id):
     vault.delete()
 
     return redirect(vault.get_absolute_url())
+
+def get_serial(request):
+    id = request.POST.get('id')
+    vault = get_object_or_404(Vault, pk = id)
+
+    return HttpResponse(json.dumps(vault.Serial), content_type="application/json")

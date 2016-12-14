@@ -46,11 +46,12 @@
 {% else %}
 <div class="code">
     <form>
-        <p><select>
+        {% csrf_token %}
+        <p><select id="accountID" onChange="checkSerial()">
         {% for vault in vaults %}
-            <option vaule="{{vault.id}}">{{vault.Name}}</option>
+            <option value="{{vault.id}}">{{vault.Name}}</option>
         {% endfor %}
-        </select>
+        </select> <input type="text" maxlength="2" class="code" id="serialBox">
         <br><table class="code">
         <tr>
         <td><input type="text" maxlength="2" class="input"></td>
@@ -61,8 +62,30 @@
         <td><input type="text" maxlength="2" class="deadcode"></td>
         <td><input type="text" maxlength="2" class="code"></td>
         </table></p>
-        <p><input type="reset" style="border-color:blue"> <input type="submit" /></p>
+        <p><input type="reset" style="border-color:blue"> <input type="button" value="코드 얻기!"></p>
     </form>
 </div>
+<script>
+    function checkSerial() {
+        $.ajaxSetup({
+            crossDomain: false,
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", $("input[name=csrfmiddlewaretoken]").val());
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "{% url 'get serial' %}",
+            data: {
+                id: $('#accountID').val()
+            },
+            success: function(data) {
+                $('#serialBox').val(data);
+            }
+        });
+    }
+
+    window.onload = checkSerial();
+    </script>
 {% endif %}
 {% endblock %}
