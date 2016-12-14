@@ -54,15 +54,15 @@
         </select> <input type="text" maxlength="2" class="code" id="serialBox">
         <br><table class="code">
         <tr>
-        <td><input type="text" maxlength="2" class="input"></td>
-        <td><input type="text" maxlength="2" class="code"></td>
-        <td><input type="text" maxlength="2" class="deadcode"></td>
+        <td><input type="text" maxlength="2" class="input" id="pos1"></td>
+        <td><input type="text" maxlength="2" class="code" id="code1"></td>
+        <td><input type="text" maxlength="2" class="deadcode" id="deadcode1"></td>
         </tr>
-        <td><input type="text" maxlength="2" class="input"></td>
-        <td><input type="text" maxlength="2" class="deadcode"></td>
-        <td><input type="text" maxlength="2" class="code"></td>
+        <td><input type="text" maxlength="2" class="input" id="pos2"></td>
+        <td><input type="text" maxlength="2" class="deadcode" id="deadcode2"></td>
+        <td><input type="text" maxlength="2" class="code" id="code2"></td>
         </table></p>
-        <p><input type="reset" style="border-color:blue"> <input type="button" value="코드 얻기!"></p>
+        <p><input type="reset" style="border-color:blue"> <input type="button" value="코드 얻기!" onClick="getCode()"></p>
     </form>
 </div>
 <script>
@@ -85,7 +85,31 @@
         });
     }
 
+    function getCode() {
+        $.ajaxSetup({
+            crossDomain: false,
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", $("input[name=csrfmiddlewaretoken]").val());
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "{% url 'get code' %}",
+            data: {
+                id: $('#accountID').val(),
+                pos1: $('#pos1').val(),
+                pos2: $('#pos2').val()
+            },
+            success: function(data) {
+                $('#code1').val(data[0]);
+                $('#deadcode1').val(data[1]);
+                $('#deadcode2').val(data[2]);
+                $('#code2').val(data[3]);
+            }
+        });
+    }
+
     window.onload = checkSerial();
-    </script>
+</script>
 {% endif %}
 {% endblock %}

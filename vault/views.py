@@ -85,3 +85,16 @@ def get_serial(request):
     vault = get_object_or_404(Vault, pk = id)
 
     return HttpResponse(json.dumps(vault.Serial), content_type="application/json")
+
+def get_code(request):
+    id = request.POST.get('id')
+    pos1 = int(request.POST.get('pos1'))
+    pos2 = int(request.POST.get('pos2'))
+    vault = get_object_or_404(Vault, pk = id)
+    codelist = vault.Code.split(',')
+    code1 = int(codelist[pos1]) / 100
+    deadcode1 = int(codelist[pos1]) % 100
+    deadcode2 = int(codelist[pos2]) / 100
+    code2 = int(codelist[pos2]) % 100
+
+    return HttpResponse(json.dumps([code1, deadcode1, deadcode2, code2]), content_type="application/json")

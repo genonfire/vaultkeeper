@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^vault/(?P<id>\d+)/edit/$', 'vault.views.edit_vault', name='edit vault'),
     url(r'^vault/(?P<id>\d+)/remove/$', 'vault.views.remove_vault', name='remove vault'),
     url(r'^getserial/$', 'vault.views.get_serial', name="get serial"),
+    url(r'^getcode/$', 'vault.views.get_code', name="get code"),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
