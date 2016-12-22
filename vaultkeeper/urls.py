@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/login/', 'django.contrib.auth.views.login', name='login', kwargs={'template_name': 'login.html'}),
+    url(r'^accounts/logout/', 'django.contrib.auth.views.logout', name='logout', kwargs={'next_page': 'show vault'}),
     url(r'^$', 'vault.views.show_vault', name='show vault'),
     url(r'^openvault/$', 'vault.views.open_vault', name='open vault'),
     url(r'^vault/new/$', 'vault.views.new_vault', name='new vault'),

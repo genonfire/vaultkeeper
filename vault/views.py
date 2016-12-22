@@ -1,18 +1,19 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from django.conf import settings
 from models import Vault
 from vault.forms import VaultEditForm
-import json
 
+import json
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-# Create your views here.
+@login_required
 def show_vault(request):
-    vaults = Vault.objects.all().order_by('Type')
+    vaults = Vault.objects.filter(User=request.user).order_by('Type')
 
     return render(
         request,
@@ -23,8 +24,9 @@ def show_vault(request):
         }
     )
 
+@login_required
 def open_vault(request):
-    vaults = Vault.objects.filter(Type='1account').exclude(Serial='').exclude(Code='')
+    vaults = Vault.objects.filter(User=request.user).filter(Type='1account').exclude(Serial='').exclude(Code='')
 
     return render(
         request,
@@ -35,11 +37,14 @@ def open_vault(request):
         }
     )
 
+@login_required
 def new_vault(request):
     if request.method == "POST":
         newForm = VaultEditForm(request.POST, request.FILES)
         if newForm.is_valid():
-            newVault = newForm.save()
+            newVault = newForm.save(commit=False)
+            newVault.User = request.user
+            newVault.save()
             return redirect(newVault.get_absolute_url())
     elif request.method == "GET":
         newForm = VaultEditForm()
@@ -53,13 +58,16 @@ def new_vault(request):
         }
     )
 
+@login_required
 def edit_vault(request, id):
     vault = get_object_or_404(Vault, pk = id)
 
     if request.method == "POST":
         editForm = VaultEditForm(request.POST, request.FILES, instance=vault)
         if editForm.is_valid():
-            editVault = editForm.save()
+            editVault = editForm.save(commit=False)
+            editVault.User = request.user
+            editVault.save()
             return redirect(editVault.get_absolute_url())
     elif request.method == "GET":
         editForm = VaultEditForm(instance=vault)
@@ -74,18 +82,21 @@ def edit_vault(request, id):
         }
     )
 
+@login_required
 def remove_vault(request, id):
     vault = get_object_or_404(Vault, pk = id)
     vault.delete()
 
     return redirect(vault.get_absolute_url())
 
+@login_required
 def get_serial(request):
     id = request.POST.get('id')
     vault = get_object_or_404(Vault, pk = id)
 
     return HttpResponse(json.dumps(vault.Serial), content_type="application/json")
 
+@login_required
 def get_code(request):
     id = request.POST.get('id')
     pos1 = int(request.POST.get('pos1'))

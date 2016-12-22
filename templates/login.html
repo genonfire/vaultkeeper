@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if form.errors %}
+<p><font color="red">login failed</font></p>
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<p style="margin-top:40px"></p>
+<div align="center">
+<table width="300px" bgcolor="#EEEEEE">
+<tr>
+    <td align="center" height="30px" bgcolor="#417690" colspan="3"><font color="#F4F382">Log in</font></td>
+</tr>
+<tr>
+    <td width="60px" rowspan="6"></td>
+    <td width="180px">&nbsp;</td>
+    <td width="60px" rowspan="6"></td>
+</tr>
+<tr>
+    <td><font size="2">{{ form.username.label_tag }}</font></td>
+</tr>
+<tr>
+    <td height="30px">{{ form.username }}</td>
+</tr>
+<tr>
+    <td><font size="2">{{ form.password.label_tag }}</font></td>
+</tr>
+<tr>
+    <td height="30px">{{ form.password }}</td>
+</tr>
+<tr>
+    <td align="center" valign="top" height="40px"><input type="submit" value="Log in" /></td>
+</tr>
+</table>
+</form>
+
+{% endblock %}

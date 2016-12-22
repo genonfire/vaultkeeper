@@ -50,6 +50,7 @@ class RadioSelectWithImage(forms.RadioSelect.renderer):
 class VaultEditForm(forms.ModelForm):
     class Meta:
         model = Vault
+        exclude = ('User',)
 
         widgets = {
             'Type' : forms.Select(attrs={'onChange':'checkType()'}),
@@ -58,3 +59,7 @@ class VaultEditForm(forms.ModelForm):
                                            'rows': 8,
                                            'style':'resize:none;overflow-y: scroll; overflow-x: hidden',}),
         }
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(VaultEditForm, self).__init__(*args, **kwargs)

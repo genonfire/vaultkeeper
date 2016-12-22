@@ -5,11 +5,11 @@
 {% if showType == 'show' %}
     <td class="accountLive">계좌번호</td>
     <td class="securitycard"><a href="{% url 'open vault' %}">보안카드</a></td>
-    <td class="headMenu"><a href="/vault/new/"><img src="{{STATIC_URL}}icons/add36.png"></a> <img src="{{STATIC_URL}}icons/identity36.png"></td>
+    <td class="headMenu"><a href="/vault/new/"><img src="{{STATIC_URL}}icons/add36.png" title="새로 만들기"></a> <a href="{% url 'logout' %}"><img src="{{STATIC_URL}}icons/identity36.png" title="로그아웃"></a></td>
 {% else %}
     <td class="account"><a href="{% url 'show vault' %}">계좌번호</a></td>
     <td class="securitycardLive">보안카드</a></td>
-    <td class="headMenu"><a href="/vault/new/"><img src="{{STATIC_URL}}icons/add36.png"></a> <img src="{{STATIC_URL}}icons/identity36.png"></td>
+    <td class="headMenu"><a href="/vault/new/"><img src="{{STATIC_URL}}icons/add36.png" title="새로 만들기"></a> <a href="{% url 'logout' %}"><img src="{{STATIC_URL}}icons/identity36.png" title="로그아웃"></a></td>
 {% endif %}
 </tr>
 </table>

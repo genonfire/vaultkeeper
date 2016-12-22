@@ -2,6 +2,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse_lazy
 from django import forms
+from django.conf import settings
 
 # Create your models here.
 class Vault(models.Model):
@@ -36,6 +37,7 @@ class Vault(models.Model):
         ('logos/olleh.png', '올레'),
     )
 
+    User = models.ForeignKey(settings.AUTH_USER_MODEL)
     Type = models.CharField(max_length=20, choices=TYPE_OPTIONS, default='1account')
     Name = models.CharField(max_length=30)
     Number = models.CharField(max_length=50)

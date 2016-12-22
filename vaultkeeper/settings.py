@@ -91,3 +91,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
 TEMPLATE_DIRS = {
     os.path.join(BASE_DIR, 'templates'),
 }
+
+LOGIN_REDIRECT_URL = 'show vault'
