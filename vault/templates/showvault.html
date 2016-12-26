@@ -49,7 +49,9 @@
         {% csrf_token %}
         <p><select id="accountID" onChange="checkSerial()">
         {% for vault in vaults %}
-            <option value="{{vault.id}}">{{vault.Name}}</option>
+            {% if vault.Serial != '' and vault.Code != '' %}
+                <option value="{{vault.id}}">{{vault.Name}}</option>
+            {% endif %}
         {% endfor %}
         </select> <input type="text" maxlength="2" class="code" id="serialBox">
         <br><table class="code">

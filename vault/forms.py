@@ -8,7 +8,7 @@ from django.conf import settings
 
 from vault.models import Vault
 
-class RadioSelectWithImageInput(forms.widgets.RadioInput):
+class RadioSelectWithImageInput(forms.widgets.RadioChoiceInput):
     def __unicode__(self):
         if 'id' in self.attrs:
             label_for = ' for="%s_%s"' % (self.attrs['id'], self.index)

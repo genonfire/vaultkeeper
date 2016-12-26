@@ -3,8 +3,8 @@ from django.db import models
 from django.core.urlresolvers import reverse_lazy
 from django import forms
 from django.conf import settings
+from fernet_fields import EncryptedCharField, EncryptedTextField
 
-# Create your models here.
 class Vault(models.Model):
     TYPE_OPTIONS = (
         ('1account', '계좌'),
@@ -39,13 +39,13 @@ class Vault(models.Model):
 
     User = models.ForeignKey(settings.AUTH_USER_MODEL)
     Type = models.CharField(max_length=20, choices=TYPE_OPTIONS, default='1account')
-    Name = models.CharField(max_length=30)
-    Number = models.CharField(max_length=50)
-    Valid = models.CharField(max_length=20, blank=True)
-    CVC = models.CharField(max_length=10, blank=True)
+    Name = EncryptedCharField(max_length=20)
+    Number = EncryptedCharField(max_length=50)
+    Valid = EncryptedCharField(max_length=20, blank=True)
+    CVC = EncryptedCharField(max_length=10, blank=True)
     Logo = models.CharField(max_length=50, choices=LOGO_OPTIONS, blank=True)
-    Serial = models.CharField(max_length=20, blank=True)
-    Code = models.CommaSeparatedIntegerField(max_length=255, blank=True)
+    Serial = EncryptedCharField(max_length=20, blank=True)
+    Code = EncryptedTextField(blank=True)
 
     def get_absolute_url(self):
         return reverse_lazy('show vault')

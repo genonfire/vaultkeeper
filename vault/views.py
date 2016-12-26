@@ -26,7 +26,7 @@ def show_vault(request):
 
 @login_required
 def open_vault(request):
-    vaults = Vault.objects.filter(User=request.user).filter(Type='1account').exclude(Serial='').exclude(Code='')
+    vaults = Vault.objects.filter(User=request.user).filter(Type='1account')
 
     return render(
         request,
@@ -99,8 +99,8 @@ def get_serial(request):
 @login_required
 def get_code(request):
     id = request.POST.get('id')
-    pos1 = int(request.POST.get('pos1'))
-    pos2 = int(request.POST.get('pos2'))
+    pos1 = int(request.POST.get('pos1')) - 1
+    pos2 = int(request.POST.get('pos2')) - 1
     vault = get_object_or_404(Vault, pk = id)
     codelist = vault.Code.split(',')
     code1 = int(codelist[pos1]) / 100
