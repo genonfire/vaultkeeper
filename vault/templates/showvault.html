@@ -64,7 +64,7 @@
         <td><input type="text" maxlength="2" class="deadcode" id="deadcode2"></td>
         <td><input type="text" maxlength="2" class="code" id="code2"></td>
         </table></p>
-        <p><input type="reset" style="border-color:blue"> <input type="button" value="코드 얻기!" onClick="getCode()"></p>
+        <p><input type="button" style="border-color:blue" value="초기화" onClick="resetCode()"> <input type="button" value="코드 얻기!" onClick="getCode()"></p>
     </form>
 </div>
 <script>
@@ -109,6 +109,15 @@
                 $('#code2').val(data[3]);
             }
         });
+    }
+
+    function resetCode() {
+        $('#pos1').val('');
+        $('#pos2').val('');
+        $('#code1').val('');
+        $('#deadcode1').val('');
+        $('#code2').val('');
+        $('#deadcode2').val('');
     }
 
     window.onload = checkSerial();
